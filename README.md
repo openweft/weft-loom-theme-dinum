@@ -1,8 +1,45 @@
 # weft-loom-theme-dinum
 
-`dinum` brand theme for weft-loom compile tooling.
+`dinum` brand theme for weft-loom compile tooling. Aligned with the
+**Système de Design de l'État (DSFR)** — the official French
+government design system maintained by DINUM.
 
-**Signature** : DINUM — DSFR Marianne palette (Marianne Blue #000091 / White / Marianne Red #E1000F).
+**Signature** : Marianne blue `#000091` + Marianne red `#E1000F` —
+the two locked colours of the République française signature.
+
+## Source
+
+Colour tokens sourced from the open-source `@gouvfr/dsfr` npm
+package (`dist/core/core.css`, 2026-06 audit) — these are the
+authoritative DSFR variables :
+
+| DSFR token                       | Hex       | Role                          |
+| -------------------------------- | --------- | ----------------------------- |
+| `--blue-france-sun-113-625`      | `#000091` | Marianne blue (signature)     |
+| `--red-marianne-main-472`        | `#E1000F` | Marianne red (signature)      |
+| `--blue-france-main-525`         | `#6A6AF4` | Action blue (links, buttons)  |
+| `--background-default-grey`      | `#F6F6F6` | Paper surface                 |
+| `--text-default-grey`            | `#161616` | Body text                     |
+
+## Typography
+
+The DSFR prescribes two fonts :
+
+- **Marianne** — official République française wordmark face, by
+  Tipotype. Free for public and private use under the
+  Marianne licence. https://www.numerique.gouv.fr/publications/marianne/
+- **Spectral** — editorial serif, Google Fonts.
+
+The theme uses Marianne for the body + headings and Spectral for
+blockquotes. If Marianne isn't installed, the theme falls back to
+system Arial.
+
+## Wordmark + signature
+
+The DSFR mandates the "RÉPUBLIQUE FRANÇAISE" lockup in the top-left
+of official documents — this theme renders it in Marianne blue at
+the upper-left of every slide. The footer rule shows the
+blue / white / red tricolore.
 
 ## Usage (Marp slides)
 
@@ -15,29 +52,29 @@ theme: dinum
 # Slide title
 ```
 
-The theme is published as an OCI artifact at
-`ghcr.io/openweft/weft-loom-theme-dinum:<tag>` and consumed by
-the tool images via a multi-stage `COPY --from=` :
+For lead / title slides :
 
-```dockerfile
-COPY --from=ghcr.io/openweft/weft-loom-theme-dinumatest /marp/ /opt/marp/themes/
+```markdown
+<!-- _class: lead -->
+
+# Title here
+## Subtitle here
 ```
 
-## Layout
+## Distribution
 
-| Path                  | Contents                                  |
-| --------------------- | ----------------------------------------- |
-| `marp/dinum.css`   | Marp slide stylesheet                     |
-| `pandoc/dinum.tex` | pandoc XeLaTeX template (V0.2)            |
-| `latex/dinum.sty`  | raw LaTeX style package (V0.2)            |
+Published as an OCI artifact at
+`ghcr.io/openweft/weft-loom-theme-dinum:<tag>`. Tool images consume
+it via multi-stage `COPY --from=` :
 
-## Brand integrity
-
-The CSS commits to the institution's published visual identity
-guide. Re-brand drift → open a PR with the citation. Logos +
-wordmarks remain the property of their owners and are referenced
-only by colour + typography, never bundled as image assets.
+```dockerfile
+COPY --from=ghcr.io/openweft/weft-loom-theme-dinum:latest /marp/dinum.css /opt/marp/themes/dinum.css
+```
 
 ## License
 
-BSD-3-Clause (openweft).
+BSD-3-Clause (openweft). The DSFR + Marianne signature remain
+property of the République française ; this theme references them
+only by colour and typography token. Use of the "RÉPUBLIQUE
+FRANÇAISE" lockup outside official government communication is
+subject to the DSFR conditions of use.

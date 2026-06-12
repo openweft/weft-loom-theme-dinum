@@ -3,129 +3,140 @@
  * @author weft-loom
  * @author_url https://github.com/openweft
  *
- * Marp slide theme inspired by the DINUM (Direction
- * Interministérielle du Numérique) visual identity and the DSFR
- * (Système de Design de l'État) palette : bleu Marianne, rouge
- * Marianne, white. Official-state look.
+ * Marp slide theme for DINUM (Direction Interministérielle du
+ * Numérique) and any document that should align with the
+ * Système de Design de l'État (DSFR). Colours sourced from the
+ * official @gouvfr/dsfr npm package (dist/core/core.css token
+ * defs, 2026-06 audit) :
+ *
+ *   --blue-france-sun-113-625 = #000091   (Marianne blue)
+ *   --red-marianne-main-472   = #e1000f   (Marianne red)
+ *   --blue-france-main-525    = #6a6af4   (action blue)
+ *
+ * Typography pinned to the DSFR-prescribed pair : Marianne (Tipotype,
+ * free for public + private use) for body + headlines, Spectral
+ * (Google Fonts) for editorial / serif passages. The theme falls
+ * back gracefully if Marianne isn't installed.
  */
 
 @import 'default';
 
+/* DSFR token mapping. */
 :root {
-  --marianne-blue: #000091;
-  --marianne-red: #e1000f;
-  --dinum-grey: #161616;
-  --dinum-bg: #ffffff;
-  --dinum-muted: #666666;
-  --dinum-alt: #f6f6f6;
+  --m-blue:    #000091;
+  --m-red:     #e1000f;
+  --m-action:  #6a6af4;
+  --m-paper:   #f6f6f6;
+  --m-text:    #161616;
+  --m-muted:   #666666;
+  --m-divider: #dddddd;
+  --m-bg:      #ffffff;
 }
 
 section {
-  background: var(--dinum-bg);
-  color: var(--dinum-grey);
-  font-family: "Marianne", "Helvetica Neue", "Arial", sans-serif;
-  padding: 64px 80px;
+  background: var(--m-bg);
+  color: var(--m-text);
+  font-family: "Marianne", "Arial", sans-serif;
+  padding: 56px 72px;
   font-size: 28px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
+/* Marianne signature : the République française wordmark is
+ * locked to the top-left with a thin blue rule beneath. */
 section::before {
-  content: '';
+  content: 'RÉPUBLIQUE FRANÇAISE';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg,
-    var(--marianne-blue) 0%,
-    var(--marianne-blue) 33%,
-    white 33%,
-    white 66%,
-    var(--marianne-red) 66%,
-    var(--marianne-red) 100%);
+  top: 28px;
+  left: 56px;
+  font-family: "Marianne", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--m-blue);
 }
 
 section::after {
-  content: 'République Française · DINUM';
+  content: '';
   position: absolute;
-  bottom: 20px;
-  right: 32px;
-  font-size: 13px;
-  color: var(--dinum-muted);
-  letter-spacing: 0.06em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background:
+    linear-gradient(90deg,
+      var(--m-blue) 0%, var(--m-blue) 40%,
+      white 40%, white 60%,
+      var(--m-red) 60%, var(--m-red) 100%);
 }
 
 h1 {
-  color: var(--marianne-blue);
+  font-family: "Marianne", sans-serif;
+  color: var(--m-blue);
   font-size: 2.4em;
   font-weight: 700;
-  margin-top: 0.4em;
   margin-bottom: 0.4em;
 }
 h2 {
-  color: var(--dinum-grey);
+  font-family: "Marianne", sans-serif;
+  color: var(--m-text);
   font-size: 1.6em;
   font-weight: 700;
-  border-bottom: 2px solid var(--marianne-blue);
-  padding-bottom: 0.15em;
 }
 h3 {
-  color: var(--marianne-red);
+  font-family: "Marianne", sans-serif;
+  color: var(--m-blue);
   font-size: 1.2em;
   font-weight: 600;
 }
 
 a {
-  color: var(--marianne-blue);
-  border-bottom: 1px solid var(--marianne-blue);
-  text-decoration: none;
+  color: var(--m-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 
 code {
-  background: var(--dinum-alt);
-  color: var(--marianne-blue);
+  background: var(--m-paper);
+  color: var(--m-blue);
   padding: 2px 6px;
+  border-radius: 3px;
   font-family: "JetBrains Mono", "Menlo", monospace;
 }
 
 pre code {
-  background: #1b1b35;
-  color: #e6e6f5;
-  border-left: 4px solid var(--marianne-blue);
+  background: var(--m-text);
+  color: #e5e5fe;
+  border-left: 4px solid var(--m-red);
   display: block;
   padding: 1em;
 }
 
 blockquote {
-  border-left: 4px solid var(--marianne-red);
+  font-family: "Spectral", Georgia, serif;
+  border-left: 4px solid var(--m-red);
   padding-left: 1em;
-  color: var(--dinum-grey);
+  color: var(--m-text);
+  font-style: italic;
 }
 
-ul li::marker { color: var(--marianne-blue); }
+ul li::marker { color: var(--m-blue); }
 
 section.lead {
-  background: var(--marianne-blue);
+  background: var(--m-blue);
   color: white;
   text-align: center;
 }
-section.lead::before {
-  /* Re-affirm the tricolore on the lead slide. */
-  width: 240px;
-  height: 8px;
-  background: linear-gradient(90deg,
-    var(--marianne-blue) 0%, white 33%, var(--marianne-red) 66%);
-  filter: brightness(1.1);
-}
-section.lead::after { color: rgba(255, 255, 255, 0.85); }
+section.lead::before { color: white; }
 section.lead h1 { color: white; }
-section.lead h2 { color: rgba(255, 255, 255, 0.85); border: none; font-weight: 400; }
+section.lead h2 { color: var(--m-action); font-weight: 400; }
 
-table { border-collapse: collapse; margin: 0.6em 0; }
+table { border-collapse: collapse; }
 th {
-  background: var(--marianne-blue);
+  background: var(--m-blue);
   color: white;
   padding: 0.4em 0.8em;
   text-align: left;
 }
-td { padding: 0.4em 0.8em; border-bottom: 1px solid #d4d4e0; }
+td { padding: 0.4em 0.8em; border-bottom: 1px solid var(--m-divider); }
