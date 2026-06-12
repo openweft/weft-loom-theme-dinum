@@ -123,12 +123,43 @@ blockquote {
 
 ul li::marker { color: var(--m-blue); }
 
+/* Lead / title slide cover. The DSFR Marianne signature is reserved
+ * for government use ; the theme does NOT bundle the lockup file.
+ * Users with the right to use it provide their own via the
+ * `--m-logo` CSS variable :
+ *
+ *   <!-- _class: lead -->
+ *   <!-- _style: "--m-logo: url(/path/to/marianne-lockup.svg)" -->
+ *
+ * Without that override, the cover keeps the upper-left wordmark
+ * (set by section::before above) but blanks the page-top reminder
+ * so the title can breathe.
+ */
 section.lead {
   background: var(--m-blue);
   color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  --m-logo: none;
 }
-section.lead::before { color: white; }
+section.lead::before {
+  content: 'RÉPUBLIQUE FRANÇAISE';
+  position: static;
+  display: block;
+  font-family: "Marianne", sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: white;
+  background: var(--m-logo) center / contain no-repeat;
+  background-color: transparent;
+  text-align: center;
+  margin-bottom: 1.4em;
+  min-height: 1.4em;
+}
+section.lead[style*="--m-logo"]::before { font-size: 0; min-height: 120px; }
 section.lead h1 { color: white; }
 section.lead h2 { color: var(--m-action); font-weight: 400; }
 

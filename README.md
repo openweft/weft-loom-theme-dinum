@@ -78,3 +78,23 @@ property of the République française ; this theme references them
 only by colour and typography token. Use of the "RÉPUBLIQUE
 FRANÇAISE" lockup outside official government communication is
 subject to the DSFR conditions of use.
+
+## Cover slide / logo
+
+The theme renders a brand-typography wordmark on `section.lead`
+slides ; no institutional logo file is bundled (trademarks remain
+the institution's property and aren't redistributable under
+BSD-3-Clause).
+
+If you have the right to use the official logotype in your deck,
+supply your own image via the `--m-logo` CSS variable :
+
+```markdown
+<!-- _class: lead -->
+<!-- _style: "--m-logo: url(/path/to/your/logo.svg)" -->
+
+# Title here
+## Subtitle here
+```
+
+Official logo source : https://www.systeme-de-design.gouv.fr/utilisation-et-organisation/identite-de-letat/ (DSFR Marianne lockup).
