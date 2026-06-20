@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/openweft/brand/main/social/weft-loom-theme-dinum.png" alt="weft-loom-theme-dinum" width="720"></p>
+
 # weft-loom-theme-dinum
 
 `dinum` brand theme for weft-loom compile tooling. Aligned with the
